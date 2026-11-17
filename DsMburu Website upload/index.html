@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dennis Mbũrũ — The Innovation Navigator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Dennis Mbũrũ, The Innovation Navigator. I help founders turn an idea that's truly theirs into a concept: the first map to their destination.">
+<meta property="og:title" content="Dennis Mbũrũ — The Innovation Navigator">
+<meta property="og:description" content="Ever felt crazy for building something different? You're not. Your idea just doesn't have a map yet.">
+<meta property="og:image" content="images/dennis.jpg">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js';</script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#14212B}
+
+img{max-width:100%}
+a{color:#E3A13B}a:hover{color:#F2C072}
+@keyframes hookUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes hookIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes hookDraw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.a-up{animation:hookUp .8s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.15s}.d2{animation-delay:.45s}.d3{animation-delay:1.35s}.d4{animation-delay:1.85s}.d5{animation-delay:2.3s}
+.a-photo{animation:hookUp 1s cubic-bezier(.2,.7,.2,1) .3s both}
+.a-ring{animation:hookIn 1.4s ease-out .2s both;transform-origin:50% 50%}
+.a-line{transform-origin:top;animation:hookDraw 1s ease-out 2.5s both}
+@media (prefers-reduced-motion: reduce){.a-up,.a-photo,.a-ring,.a-line{animation:none}}
+.cf{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.cf label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:500;color:#C9D3DA}
+.cf input,.cf textarea{font:inherit;font-size:16px;color:#FFFFFF;background:#1C2C38;border:1px solid #4A5B67;border-radius:12px;padding:14px 16px}
+.cf input:focus,.cf textarea:focus{outline:2px solid #E3A13B;outline-offset:1px;border-color:#E3A13B}
+.cf textarea{min-height:96px;resize:vertical}
+.cf .row{display:flex;flex-wrap:wrap;gap:16px}.cf .row label{flex:1 1 240px}
+.cf button{align-self:flex-start;font:inherit;font-weight:600;font-size:16px;color:#14212B;background:#E3A13B;border:0;padding:16px 28px;border-radius:999px;cursor:pointer}
+.cf button:hover{background:#F2C072}.cf button:disabled{opacity:.6;cursor:wait}
+.cf-hp{position:absolute;left:-9999px}
+
+/* ---------- Interactivity layer ---------- */
+/* Screens. On phones they flow normally; on wide windows ("stage mode") they share one fixed stage
+   the size of the window and crossfade as you scroll, so the window never seems to move. */
+.scr{display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;min-height:calc(100dvh - var(--nav,72px));scroll-margin-top:var(--nav,72px)}
+.scr>*{width:100%;box-sizing:border-box}
+#spacer{display:none}
+html.stage{scroll-snap-type:y mandatory}
+.stage #navwrap{position:fixed;top:0;left:0;right:0}
+.stage #stage{position:fixed;top:var(--nav,72px);left:0;right:0;bottom:0;background:#14212B}
+.stage #spacer{display:block}
+.stage #spacer .snap{height:100vh;scroll-snap-align:start}
+.stage .scr{position:absolute;inset:0;min-height:0;overflow:auto;opacity:0;visibility:hidden;transform:translateY(calc(24px * var(--dir,1)));transition:opacity .45s cubic-bezier(.2,.7,.2,1) .14s,transform .45s cubic-bezier(.2,.7,.2,1) .14s,visibility 0s linear .6s}
+.stage .scr>*{margin-top:auto!important;margin-bottom:auto!important}
+.stage #top>*{margin-bottom:0!important}
+.stage #top{overflow:hidden}
+.stage .scr.live{opacity:1;visibility:visible;transform:none;z-index:2}
+.stage .scr.leaving{opacity:0;visibility:visible;transform:translateY(calc(-16px * var(--dir,1)));z-index:1;transition:opacity .28s ease,transform .28s ease}
+.stage .scr .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.stage .scr.live .rv{opacity:1;transform:none;transition-delay:calc(var(--d,0s) + .2s)}
+#dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:10px;margin:0;padding:0}
+#dots a{position:relative;display:block;width:8px;height:8px;border-radius:999px;background:rgba(138,152,163,.6);transition:background .25s,box-shadow .25s}
+#dots a:hover,#dots a.on{background:#E3A13B}
+#dots a.on{box-shadow:0 0 0 3px rgba(227,161,59,.35)}
+#dots a::before{content:attr(data-label);position:absolute;right:18px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:12px;font-weight:500;line-height:1;color:#FFFFFF;background:#14212B;border-radius:6px;padding:6px 9px;opacity:0;pointer-events:none;transition:opacity .2s}
+#dots a:hover::before,#dots a:focus-visible::before{opacity:1}
+#dots a:focus-visible{outline:2px solid #E3A13B;outline-offset:3px}
+@media (max-width:759px){#dots{display:none}}
+
+/* Scroll reveals */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+
+/* Reading progress, sticky nav, back to top */
+#pbar{position:fixed;top:0;left:0;height:3px;width:0;background:#E3A13B;z-index:60}
+#navwrap{position:sticky;top:0;z-index:50;background:#14212B;transition:box-shadow .3s}
+#navwrap.scrolled{box-shadow:0 1px 0 #33444F,0 10px 30px rgba(0,0,0,.28)}
+#nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:28px;font-size:15px}
+nav a.nl{position:relative;color:#C9D3DA;text-decoration:none;padding:4px 0;transition:color .2s}
+nav a.nl::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#E3A13B;transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+nav a.nl:hover,nav a.nl.on{color:#FFFFFF}
+nav a.nl.on::after{transform:scaleX(1)}
+#menu-btn{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0;background:none;border:1px solid #4A5B67;border-radius:10px;cursor:pointer}
+#menu-btn span{display:block;width:20px;height:2px;margin:0 auto;background:#FFFFFF;transition:transform .25s,opacity .2s}
+#menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+#menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:899px){
+  #menu-btn{display:inline-flex}
+  #nav-links{display:none;flex-basis:100%;flex-direction:column;align-items:flex-start;gap:18px;padding:8px 0 12px}
+  #nav-links.open{display:flex}
+}
+#totop{position:fixed;right:24px;bottom:84px;width:46px;height:46px;border-radius:999px;border:1px solid #4A5B67;background:#14212B;color:#E3A13B;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s;z-index:40;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+#totop.show{opacity:1;transform:none;pointer-events:auto}
+#totop:hover{background:#22323E}
+
+/* Buttons */
+.btn{transition:background .2s,transform .2s,box-shadow .2s;display:inline-block}
+.btn:hover{background:#F2C072!important;transform:translateY(-1px);box-shadow:0 8px 20px rgba(227,161,59,.25)}
+.btn-o{transition:border-color .2s,color .2s,transform .2s;display:inline-block}
+.btn-o:hover{border-color:#E3A13B!important;color:#E3A13B!important;transform:translateY(-1px)}
+.card{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(20,33,43,.08)}
+
+/* Work with me: what you get / who it's for */
+.wm-l{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6B5320}
+.wm-g{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 16px}
+.wm-g li{display:flex;flex-direction:column;gap:2px;padding:8px 10px;background:#FFFFFF;border-radius:12px}
+.wm-g strong{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#14212B}
+.wm-g span{font-size:13px;line-height:1.45;color:#4A5964}
+@media (max-width:480px){.wm-g{grid-template-columns:1fr}}
+
+/* Story tracker, part labels and "next" links */
+.trk{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.trk-l{margin-right:6px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#4A5964}
+.trk a{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:#8A98A3;text-decoration:none;white-space:nowrap;transition:color .2s}
+.trk a:hover{color:#14212B}
+.trk a b{width:22px;height:22px;flex:0 0 22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1px solid #C9D3DA;color:#4A5964;box-sizing:border-box}
+.trk a.done{color:#4A5964}
+.trk a.on{color:#14212B;font-weight:600}
+.trk a.done b,.trk a.on b{background:#E3A13B;border-color:#E3A13B;color:#14212B}
+.trk i{flex:0 1 40px;min-width:12px;height:0;border-top:1.5px dashed #C9D3DA}
+.trk i.done{border-top-style:solid;border-color:#E3A13B}
+.pl{margin:0;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6B5320}
+.nx{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:#14212B;text-decoration:none;padding-bottom:3px;border-bottom:2px solid #E3A13B;transition:gap .2s,color .2s}
+.nx:hover{gap:12px;color:#14212B}
+.dk .trk-l{color:#A9B7C1}
+.dk .trk a{color:#6F808C}
+.dk .trk a:hover,.dk .trk a.on{color:#FFFFFF}
+.dk .trk a.done{color:#A9B7C1}
+.dk .trk a b{border-color:#4A5B67;color:#A9B7C1}
+.dk .trk a.done b,.dk .trk a.on b{background:#E3A13B;border-color:#E3A13B;color:#14212B}
+.dk .trk i{border-color:#4A5B67}
+.dk .trk i.done{border-color:#E3A13B}
+.dk .pl{color:#E3A13B}
+.dk .nx,.dk .nx:hover{color:#FFFFFF}
+@media (max-width:640px){.trk a:not(.on) span{display:none}.trk-l{flex-basis:100%;margin:0 0 2px}}
+
+/* Quotes, story cards and the destination list */
+.qt{margin:0;padding-left:14px;border-left:3px solid #E3A13B}
+.qt p{margin:0;font-family:'Space Grotesk',sans-serif;font-style:italic;font-size:14px;line-height:1.45;color:#14212B}
+.qt cite{display:block;margin-top:4px;font-style:normal;font-size:12px;color:#4A5964}
+.sc-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.sc{background:#FFFFFF;border-radius:16px;padding:20px 22px;display:flex;flex-direction:column;gap:5px}
+.sc h3{margin:0 0 2px;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:22px;color:#14212B}
+.sc p{margin:0;font-size:14px;line-height:1.5;color:#2B3A45}
+.sc .st{margin-top:6px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6B5320}
+.sc strong{font-weight:600;color:#14212B}
+.sc .qt{margin-top:10px}
+.chips{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.chips li{background:#F3F5F6;border-radius:999px;padding:5px 11px;font-size:12px;line-height:1.35;font-weight:500;color:#14212B}
+/* Simplified site: checklists, concept lines, chips on each background */
+.ck{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.ck li{position:relative;padding-left:28px;font-size:16px;color:#14212B}
+.ck li::before{content:"";position:absolute;left:0;top:4px;width:16px;height:16px;border-radius:999px;background:#E3A13B}
+.ck li::after{content:"";position:absolute;left:5px;top:8px;width:6px;height:4px;border-left:2px solid #14212B;border-bottom:2px solid #14212B;transform:rotate(-45deg)}
+.sc .cc{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:18px;line-height:1.3;color:#14212B}
+#stories .sc{background:#F3F5F6;padding:24px;gap:6px}
+#stories .chips li{background:#FFFFFF}
+#stories .sc p{font-size:15px}
+#programme .chips li{background:#FFFFFF;font-size:13px;padding:7px 13px}
+.chips.dkc li{background:#1C2C38;border:1px solid #33444F;color:#FFFFFF;font-size:13px;padding:7px 13px}
+#contact textarea{min-height:84px}
+.dl li{display:flex;gap:20px;padding:14px 0;border-bottom:1px solid #E3E8EB}
+.dl li:last-child{border-bottom:0}
+.dl strong{flex:0 0 140px;font-weight:600;color:#14212B}
+.dl span{color:#4A5964}
+@media (max-width:480px){.dl li{flex-direction:column;gap:2px}.dl strong{flex:none}}
+
+/* Programme stepper */
+.pg{margin:56px 0 0;display:flex;flex-direction:column;gap:14px}
+.pg-track{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.pg-track span{display:block;padding:10px 4px;text-align:center;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4A5964;background:#E3E8EB;border-radius:8px;transition:background .3s,color .3s}
+.pg-track span.on{background:#E3A13B;color:#14212B}
+.pg-track span.p2.on{background:#22323E;color:#FFFFFF}
+.pg-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pg-tab{font:inherit;text-align:left;background:#FFFFFF;border:1px solid transparent;border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:border-color .2s,transform .2s,box-shadow .2s}
+.pg-tab:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,33,43,.08)}
+.pg-tab[aria-selected="true"]{border-color:#E3A13B;box-shadow:0 8px 24px rgba(20,33,43,.08)}
+.pg-tab:focus-visible{outline:2px solid #E3A13B;outline-offset:2px}
+.pg-tab .n{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#6B5320}
+.pg-tab .t{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:500;color:#14212B}
+.pg-tab .m{font-size:13px;color:#4A5964}
+.pg-panel{background:#FFFFFF;border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;animation:hookUp .45s cubic-bezier(.2,.7,.2,1) both}
+.pg-panel[hidden]{display:none}
+.pg-panel .ph{margin:0;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B5320}
+.pg-panel h3{margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:22px;line-height:1.2;color:#14212B}
+.pg-panel p{margin:0;font-size:16px;color:#2B3A45;max-width:720px}
+.pg-panel .rcv{margin:4px 0 0;padding-top:14px;border-top:1px solid #E3E8EB;font-size:15px;color:#4A5964}
+.pg-nav{display:flex;align-items:center;gap:16px}
+.pg-nav button{font:inherit;font-weight:500;font-size:15px;color:#14212B;background:none;border:1px solid #C9D3DA;border-radius:999px;padding:10px 18px;cursor:pointer;transition:border-color .2s}
+.pg-nav button:hover{border-color:#14212B}
+.pg-nav button:disabled{opacity:.4;cursor:default;border-color:#C9D3DA}
+.pg-nav span{font-size:14px;color:#4A5964}
+@media (max-width:700px){.pg-tabs{grid-template-columns:repeat(2,1fr)}.pg-track span{font-size:10px;letter-spacing:.04em;padding:8px 2px}}
+
+/* Tensions list + diagram */
+.tl li{display:flex;flex-direction:column;gap:1px;transition:color .25s,transform .25s cubic-bezier(.2,.7,.2,1)}
+.tq{font-family:Inter,system-ui,sans-serif;font-style:italic;font-weight:400;font-size:14px;line-height:1.4;letter-spacing:0;color:#4A5964}
+.tl li.hot{color:#E3A13B;transform:translateX(10px)}
+.td{margin-top:56px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.td svg{width:100%;max-width:520px;height:auto;display:block;touch-action:manipulation;overflow:visible}
+.td .ln{fill:none;stroke:#D3DAE0;stroke-width:1.5;transition:stroke .3s,stroke-width .3s,opacity .3s}
+.td .ln.taut{stroke:#E3A13B;stroke-width:2.5}
+.td .ln.dim{opacity:.35}
+.td .sp{fill:none;stroke:#E3A13B;stroke-width:2;opacity:0;transition:opacity .4s}
+.td.solved .sp{opacity:1}
+.td.solved .ln{opacity:.12}
+.td .ctr{opacity:0;transition:opacity .4s}
+.td.solved .ctr{opacity:1}
+.td .tn{cursor:pointer;outline:none}
+.td .tn .h{fill:#E3A13B;opacity:0;transition:opacity .25s}
+.td .tn.on .h,.td .tn:hover .h{opacity:.18}
+.td .tn .c{fill:#FFFFFF;stroke:#14212B;stroke-width:2;transition:fill .2s,stroke .2s}
+.td .tn.on .c,.td .tn:hover .c{fill:#E3A13B;stroke:#E3A13B}
+.td .tn:focus-visible .c{stroke:#E3A13B;stroke-width:3}
+.td .tn text{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500;fill:#14212B;transition:fill .2s}
+.td .tn.on text{font-weight:700;fill:#6B5320}
+.td-cap{margin:0;min-height:1.6em;font-size:16px;color:#4A5964;max-width:520px}
+.td-btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:#14212B;text-decoration:none;background:none;border:1px solid #C9D3DA;border-radius:999px;padding:11px 20px;transition:border-color .2s,background .2s,color .2s,gap .2s}
+.td-btn:hover{border-color:#14212B;color:#14212B;gap:12px}
+.td[data-mode="concept"] .tn{cursor:default}
+.dk .td .ln{stroke:#3A4C59}
+.dk .td .tn .c{fill:#14212B;stroke:#C9D3DA}
+.dk .td .tn text{fill:#C9D3DA}
+.dk .td.solved .tn .c{fill:#E3A13B;stroke:#E3A13B}
+.dk .td.solved .tn text{fill:#FFFFFF}
+.dk .td .ctr circle{fill:#1C2C38}
+.dk .td .ctr text{fill:#E3A13B}
+.dk .td-cap{color:#FFFFFF;font-family:'Space Grotesk',sans-serif;font-size:17px}
+
+/* Tension chooser + booking (contact) */
+.ey{margin:0;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#E3A13B}
+.tc{display:flex;flex-wrap:wrap;gap:10px}
+.tc button{font:inherit;font-size:15px;font-weight:500;color:#C9D3DA;background:transparent;border:1px solid #4A5B67;border-radius:999px;padding:11px 18px;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.tc button:hover{border-color:#E3A13B;color:#FFFFFF;transform:translateY(-1px)}
+.tc button[aria-pressed="true"]{background:#E3A13B;border-color:#E3A13B;color:#14212B}
+.tc-reply{margin:0;max-width:720px;font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:1.4;color:#FFFFFF;border-left:2px solid #E3A13B;padding-left:20px}
+.tc-reply.in{animation:hookUp .5s cubic-bezier(.2,.7,.2,1) both}
+.ct{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-start}
+.book{flex:1 1 300px;max-width:440px;background:#1C2C38;border:1px solid #33444F;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.book h3{margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:24px;line-height:1.15;color:#FFFFFF}
+.book p{margin:0;font-size:16px;color:#C9D3DA}
+.cfw{flex:2 1 420px;display:flex;flex-direction:column;gap:16px}
+
+@media (prefers-reduced-motion: reduce){
+  .js .rv{opacity:1;transform:none;transition:none}
+  .pg-panel,.tc-reply.in{animation:none}
+  .stage .scr,.stage .scr .rv{transition:none}
+  .btn,.btn-o,.card,.pg-tab,.tc button,.tl li{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div id="pbar" aria-hidden="true"></div>
+
+<div style="font-family: Inter, system-ui, sans-serif; color: #2B3A45; background: #14212B; width: 100%; line-height: 1.6">
+
+<!-- NAV + HOOK -->
+<div id="navwrap" style="color: #FFFFFF">
+<nav aria-label="Main" style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 12px; color: #FFFFFF; text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.01em">
+<svg aria-hidden="true" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#E3A13B" stroke-width="1.75"><circle cx="14" cy="14" r="12"></circle><path d="M18.5 9.5 12 12l-2.5 6.5L16 16z"></path></svg>
+<span>Dennis Mbũrũ</span>
+</a>
+<button id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span><span></span></button>
+<div id="nav-links">
+<a class="nl" href="#top">Home</a>
+<a class="nl" href="#story">The story</a>
+<a class="nl" href="#programme">The programme</a>
+<a class="nl" href="#stories">Reviews</a>
+<a class="nl" href="#about">About</a>
+<a class="nl" href="https://www.linkedin.com/in/dennismburu" target="_blank" rel="noopener">LinkedIn ↗</a>
+<a class="btn" href="#contact" style="color: #14212B; background: #E3A13B; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 999px">Start a conversation</a>
+</div>
+</nav>
+</div>
+
+<div id="stage">
+<header id="top" class="scr" data-nav="top" style="background: #14212B; color: #FFFFFF">
+<div style="max-width: 1200px; margin: auto auto 0; padding: 40px 32px 0; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0 48px">
+<div style="flex: 1 1 400px; min-width: 0; padding: 48px 0 0">
+<p style="margin: 0 0 20px; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E3A13B" class="a-up d1">The Innovation Navigator</p>
+<h1 class="a-up d2" style="margin: 0; max-width: 760px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.9rem, 3.2vw, 2.75rem); line-height: 1.08; letter-spacing: -0.03em; color: #C9D3DA">Ever felt crazy for building something different?</h1>
+<p class="a-up d3" style="margin: 24px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 1; letter-spacing: -0.03em; color: #E3A13B">You're not.</p>
+<p class="a-up" style="animation-delay: 1.6s; margin: 18px 0 0; max-width: 520px; font-size: 18px; line-height: 1.45; color: #C9D3DA">Your idea just doesn't have a map yet.</p>
+<div class="a-up d4" style="margin-top: 30px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px">
+<a class="btn" href="#turn" style="color: #14212B; background: #E3A13B; text-decoration: none; font-weight: 600; font-size: 16px; padding: 16px 28px; border-radius: 999px">See how it all fits together</a>
+<div style="display: flex; flex-direction: column; align-items: center">
+<a class="btn-o" href="#story" style="color: #FFFFFF; text-decoration: none; font-weight: 500; font-size: 16px; padding: 15px 27px; border-radius: 999px; border: 1px solid #4A5B67">Is this your story?</a>
+<span aria-hidden="true" style="display: block; width: 12px; height: 12px; margin-top: 20px; border-radius: 999px; background: #E3A13B"></span>
+<span aria-hidden="true" class="a-line" style="display: block; width: 0; height: 56px; border-left: 2px dashed #E3A13B"></span>
+</div>
+</div>
+</div>
+<div style="flex: 0 1 640px; max-width: 640px; margin: 0 auto; position: relative; display: flex; justify-content: flex-start; align-items: flex-end">
+<svg aria-hidden="true" class="a-ring" viewBox="0 0 400 400" fill="none" style="position: absolute; left: 6%; top: 16%; width: 80%; height: auto">
+<circle cx="200" cy="200" r="190" stroke="#E3A13B" stroke-width="1.5" opacity="0.55"></circle>
+<circle cx="200" cy="200" r="150" stroke="#33444F" stroke-width="1"></circle>
+</svg>
+<img src="images/dennis-hero.webp" alt="Dennis Mbũrũ" class="a-photo" style="position: relative; display: block; width: 80%; height: auto; max-height: calc(100vh - var(--nav, 72px) - 110px); object-fit: contain; object-position: left bottom">
+<p class="a-up d5" style="position: absolute; left: 81%; right: 0; bottom: 48px; margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; line-height: 1.2; font-weight: 700; color: #E3A13B">Dennis Mbũrũ</p>
+</div>
+</div>
+</header>
+
+<!-- STORY, PART 1: THE MAZE -->
+<section id="story" class="scr" data-nav="story" style="background: #F3F5F6">
+<div style="max-width: 900px; width: calc(100% - 32px); box-sizing: border-box; margin: 0 auto; padding: 40px 32px 40px 48px; border-left: 2px dashed #E3A13B; display: flex; flex-direction: column; gap: 26px">
+<div class="trk" data-part="1"></div>
+<div class="rv" style="display: flex; flex-direction: column; gap: 14px">
+<p class="pl" style="position: relative"><span aria-hidden="true" style="position: absolute; left: -56px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 999px; background: #E3A13B; box-shadow: 0 0 0 6px #F3F5F6"></span>Part 1 of 3 · The maze</p>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.15; letter-spacing: -0.02em; color: #14212B">Your destination is clear. The map doesn't exist yet.</h2>
+</div>
+<p class="rv" style="--d:.1s; margin: 0; max-width: 680px; font-size: 20px; line-height: 1.5; color: #2B3A45">It feels like travelling without a map. Your idea is truly yours, so no one has been this way before.</p>
+<p class="rv" style="--d:.15s; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.25; letter-spacing: -0.01em; color: #14212B">This is the maze. You keep moving, but somehow end up where you started.</p>
+<a class="nx rv" style="--d:.2s" href="#tensions">What keeps holding you back? <span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<!-- STORY, PART 2: THE TENSION -->
+<section id="tensions" class="scr" data-nav="story" style="background: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px 32px; display: flex; flex-wrap: wrap; gap: 20px 56px; align-items: center">
+<div class="trk" data-part="2" style="flex-basis: 100%"></div>
+<div class="rv" style="flex: 1 1 400px; box-sizing: border-box; padding-left: 24px; border-left: 2px dashed #E3A13B">
+<p class="pl" style="position: relative; margin-bottom: 12px"><span aria-hidden="true" style="position: absolute; left: -32px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 999px; background: #E3A13B; box-shadow: 0 0 0 6px #FFFFFF"></span>Part 2 of 3 · The tension</p>
+<h2 style="margin: 0 0 16px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.5rem, 2.6vw, 2.2rem); line-height: 1.15; letter-spacing: -0.02em; color: #14212B">Everything you want, pulling in different directions.</h2>
+<ul class="tl" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-family: 'Space Grotesk', sans-serif; font-style: italic; font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.3; letter-spacing: -0.01em; color: #14212B">
+<li style="padding: 10px 0; border-bottom: 1px solid #E3E8EB"><span>“I want my team to believe in it.”</span></li>
+<li style="padding: 10px 0; border-bottom: 1px solid #E3E8EB"><span>“I want people to pay what it's worth.”</span></li>
+<li style="padding: 10px 0; border-bottom: 1px solid #E3E8EB"><span>“I want it to reach far more people.”</span></li>
+<li style="padding: 10px 0; border-bottom: 1px solid #E3E8EB"><span>“I want it to stay as good as the day I started.”</span></li>
+<li style="padding: 10px 0; font-weight: 700"><span>“And I want all of it to live out the mission.”</span></li>
+</ul>
+<p style="margin: 16px 0 0; padding-left: 14px; border-left: 3px solid #E3A13B; font-family: 'Space Grotesk', sans-serif; font-style: italic; font-weight: 700; font-size: clamp(1.35rem, 2vw, 1.75rem); line-height: 1.2; color: #14212B">Is all of this possible?</p>
+</div>
+<div class="td rv" id="td" data-mode="tension" style="--d:.1s; flex: 1 1 360px; margin-top: 0">
+<svg viewBox="-60 -10 560 400" role="group" aria-label="Five things you want: a team that believes, being paid what it's worth, reaching more people, keeping the quality, and living the mission. Each one pulls against the others.">
+<g class="g-lines"></g>
+<g class="g-spokes"></g>
+<g class="g-nodes"></g>
+</svg>
+<p class="td-cap" aria-live="polite">Tap anything you want, and feel it pull on the rest.</p>
+<a class="td-btn" href="#turn">See the answer <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</section>
+
+<!-- STORY, PART 3: THE CONCEPT -->
+<section id="turn" class="scr dk" data-nav="story" style="background: #14212B; color: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px 32px; display: flex; flex-wrap: wrap; gap: 20px 56px; align-items: center">
+<div class="trk" data-part="3" style="flex-basis: 100%"></div>
+<div class="rv" style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 16px">
+<p class="pl">Part 3 of 3 · The concept</p>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.12; letter-spacing: -0.02em; color: #FFFFFF">A concept is the first map to your destination.</h2>
+<p style="margin: 0; max-width: 520px; font-size: 18px; color: #C9D3DA">An actionable idea, drawn for your journey. It shows you the way to start, and fills in as you travel.</p>
+<div style="margin-top: 6px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: #FFFFFF">Once you can see it clearly, you can build it.</p>
+<ul class="chips dkc"><li>Clear to you</li><li>Shared by your team</li><li>Convincing to everyone you need</li></ul>
+</div>
+</div>
+<div class="td rv" id="td2" data-mode="concept" style="--d:.1s; flex: 1 1 340px; margin-top: 0">
+<svg viewBox="-60 -10 560 400" role="img" aria-label="The same five things you want, now each connected to one centre: your concept.">
+<g class="g-lines"></g>
+<g class="g-spokes"></g>
+<g class="ctr" aria-hidden="true">
+<circle cx="220" cy="190" r="40" fill="#FFFFFF" stroke="#E3A13B" stroke-width="2"></circle>
+<text x="220" y="187" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" letter-spacing="0.08em" fill="#6B5320">YOUR</text>
+<text x="220" y="203" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" letter-spacing="0.08em" fill="#6B5320">CONCEPT</text>
+</g>
+<g class="g-nodes"></g>
+</svg>
+<p class="td-cap">They were never pulling apart. They just weren't connected.</p>
+</div>
+<div class="rv" style="--d:.2s; flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; padding-top: 18px; border-top: 1px solid #33444F">
+<img src="images/dennis-mirrored.jpg" alt="" style="width: 52px; height: 52px; border-radius: 999px; object-fit: cover; object-position: center 20%">
+<p style="margin: 0; flex: 1 1 420px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.3">Most consultants come in once you can say what problem you solve. I come in before that.</p>
+<a class="nx" href="#programme">Next: Work with me <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</section>
+
+<!-- WORK WITH ME -->
+<section id="programme" class="scr" data-nav="programme" style="background: #F3F5F6">
+<div style="max-width: 1200px; margin: 0 auto; padding: 36px 32px; display: flex; flex-wrap: wrap; gap: 28px 56px; align-items: center">
+<div class="rv" style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B5320">Work with me</p>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.1; letter-spacing: -0.02em; color: #14212B">Let's draw your first map, then travel it together.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #2B3A45">Six months, one-to-one, for mission-led founders. Two months to draw the map, then four to navigate it with you, week by week. <strong style="font-weight: 600; color: #14212B">I walk beside you, through the doubts and the decisions. It's your journey, but you won't walk it alone.</strong></p>
+<div style="margin-top: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px">
+<a class="btn" href="https://calendar.app.google/PuN53pDsxCSAW9wN8" target="_blank" rel="noopener" style="color: #14212B; background: #E3A13B; text-decoration: none; font-weight: 600; font-size: 16px; padding: 15px 26px; border-radius: 999px">Book a free call ↗</a>
+<p style="margin: 0; font-size: 15px; color: #4A5964">Need help with just one part, like a product or your marketing? <a href="#contact" style="color: #14212B; font-weight: 600">Ask me.</a></p>
+</div>
+</div>
+<div class="rv" style="--d:.12s; flex: 1 1 380px; display: flex; flex-direction: column; gap: 18px">
+<div style="background: #FFFFFF; border-radius: 16px; padding: 22px 24px">
+<p class="wm-l">What you get</p>
+<ul class="ck">
+<li>Your concept, in one clear story</li>
+<li>A plan your team can follow</li>
+<li>Weekly decisions, in writing</li>
+<li>Regular course checks</li>
+</ul>
+</div>
+<div>
+<p class="wm-l">Where it leads</p>
+<ul class="chips"><li>A team aligned with the mission</li><li>A business that pays its own way</li><li>Growth that doesn't depend on you</li><li>The right products for the right customers</li><li>A business that lives out its mission</li></ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- STORIES -->
+<section id="stories" class="scr" data-nav="stories" style="background: #FFFFFF">
+<div style="max-width: 1240px; margin: 0 auto; padding: 32px 32px">
+<p class="rv" style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B5320">Reviews from the road</p>
+<h2 class="rv" style="margin: 0; max-width: 820px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.6rem, 2.6vw, 2.25rem); line-height: 1.1; letter-spacing: -0.02em; color: #14212B">Founders who found their map, in their own words.</h2>
+<div class="sc-grid">
+<article class="card rv sc">
+<h3>Bee Natural</h3>
+<p class="st">Challenge</p>
+<p>Natural products in a market full of counterfeits.</p>
+<p class="st">Concept</p>
+<p class="cc">Fresh from the farm, delivered in its natural form.</p>
+<p class="st">Results</p>
+<ul class="chips"><li>Hotels became customers</li><li>A second brand from the same model</li></ul>
+<blockquote class="qt"><p>“Thank you for walking the journey with us.”</p><cite>CEO, Voellada Ventures, parent company of Bee Natural</cite></blockquote>
+</article>
+<article class="card rv sc" style="--d:.1s">
+<h3>Comfys Care</h3>
+<p class="st">Challenge</p>
+<p>An unknown company that needed to grow without depending on one person.</p>
+<p class="st">Concept</p>
+<p class="cc">Health in the hands of patients.</p>
+<p class="st">Results</p>
+<ul class="chips"><li>A pioneer of digital medical device sales in Kenya</li><li>Product lines grew from 1 to 5</li></ul>
+<blockquote class="qt"><p>“He made great strides for the company's social media marketing strategy … content that steered the growth of the company.”</p><cite>Former team member, Comfys Care</cite></blockquote>
+</article>
+<article class="card rv sc" style="--d:.2s">
+<h3>Lughabot</h3>
+<p class="st">Challenge</p>
+<p>A wellbeing purpose lost in ordinary English lessons.</p>
+<p class="st">Concept</p>
+<p class="cc">Wellbeing through language learning.</p>
+<p class="st">Results</p>
+<ul class="chips"><li>A coaching programme for deeper connection</li><li>A more aligned clientele</li></ul>
+<blockquote class="qt"><p>“A life-saving marketing strategy.”</p><cite>Collins, CEO, Lughabot, Vietnam</cite></blockquote>
+</article>
+</div>
+<div class="rv" style="--d:.25s; margin-top: 18px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px; font-size: 15px; color: #4A5964">
+<p style="margin: 0">Plus <span class="cnt" data-to="40">40</span>+ founders through Sinapis · Independent clients in Kenya and abroad</p>
+<a href="https://www.linkedin.com/in/dennismburu" target="_blank" rel="noopener" style="color: #14212B; font-weight: 600">Read more recommendations on LinkedIn ↗</a>
+</div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="scr" data-nav="about" style="background: #F3F5F6">
+<div style="max-width: 1100px; margin: 0 auto; padding: 36px 32px; display: flex; flex-wrap: wrap; gap: 28px 56px; align-items: center">
+<div class="rv" style="flex: 1 1 460px; display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.55; color: #2B3A45">
+<p style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B5320">About me</p>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.6rem, 2.8vw, 2.3rem); line-height: 1.15; letter-spacing: -0.02em; color: #14212B">For my whole career, I've been drawn to one thing: potential that isn't being used.</h2>
+<p style="margin: 0">I trained as a spatial planner, so I've always worked with maps. Today I help founders draw the first map for ideas no one has mapped before.</p>
+<p style="margin: 0">I've built Comfys Care into a national brand, advised more than 40 founders at Sinapis, supported public health projects across Africa at IQVIA, and worked with founders as far away as Vietnam.</p>
+<p style="margin: 4px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 19px; line-height: 1.35; color: #14212B">My goal is to see Africa move from a struggling continent to a soaring one, driven by businesses that realise their full potential.</p>
+<p style="margin: 0; font-size: 14px; color: #55636E">Dennis Mbũrũ · The Innovation Navigator · Nairobi</p>
+</div>
+<div class="rv" style="--d:.15s; flex: 0 1 300px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #4A5964">
+<img src="images/dennis.jpg" alt="Dennis Mbũrũ, smiling, in a navy blazer" style="width: 100%; max-width: 240px; aspect-ratio: 3 / 4; object-fit: cover; object-position: center top; border-radius: 16px; margin-bottom: 6px">
+<div><strong style="font-weight: 600; color: #14212B">MBA, Entrepreneurship &amp; Innovation</strong><br>Zetech University</div>
+<div><strong style="font-weight: 600; color: #14212B">BA, Spatial Planning</strong><br>Jaramogi Oginga Odinga University of Science and Technology</div>
+<div><strong style="font-weight: 600; color: #14212B">Graduate Member</strong><br>Kenya Institute of Planners</div>
+<div><strong style="font-weight: 600; color: #14212B">Languages</strong><br>English, Français, Kiswahili, العربية (learning)</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<footer id="contact" class="scr" data-nav="contact" style="background: #14212B; color: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 36px 32px 16px; display: flex; flex-direction: column; gap: 22px">
+<div class="rv" style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; max-width: 860px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.08; letter-spacing: -0.03em">Which tension is holding your business back? Let's look at it together.</h2>
+<p style="margin: 0; font-size: 18px; color: #C9D3DA">You don't need to have it figured out. Bring the idea as it is.</p>
+</div>
+
+<div class="ct rv" style="--d:.12s">
+<div class="book">
+<p class="ey">The quickest way</p>
+<h3>Let's discuss over a free 30-minute call</h3>
+<p>I'll tell you honestly whether I can help.</p>
+<a class="btn" href="https://calendar.app.google/PuN53pDsxCSAW9wN8" target="_blank" rel="noopener" style="align-self: flex-start; margin-top: 4px; color: #14212B; background: #E3A13B; text-decoration: none; font-weight: 600; font-size: 16px; padding: 15px 26px; border-radius: 999px">Book a free call ↗</a>
+</div>
+<div class="cfw">
+<p class="ey">Or leave a message</p>
+<form action="/" class="cf" method="POST" name="contact" data-netlify="true" data-netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="contact">
+<p class="cf-hp"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<div class="row">
+<label>Your name<input type="text" name="name" autocomplete="name" required></label>
+<label>Your email<input type="email" name="email" autocomplete="email" required></label>
+</div>
+<label>What decision are you weighing?<textarea name="message" placeholder="For example: whether to launch a new product, how to price it, or how to bring your team on board." required></textarea></label>
+<button type="submit">Start a conversation</button>
+<p id="cf-status" role="status" aria-live="polite" style="margin: 0; font-size: 16px; color: #C9D3DA"></p>
+</form>
+<p style="margin: 0; font-size: 15px; color: #C9D3DA">I reply within 48 hours. Prefer email? <a href="mailto:info@dsmburu.co.ke" style="font-weight: 600">info@dsmburu.co.ke</a></p>
+</div>
+</div>
+
+<div style="padding-top: 14px; border-top: 1px solid #33444F; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #A9B7C1">
+<span>Dennis Mbũrũ · The Innovation Navigator · Nairobi, Kenya</span>
+<span>info@dsmburu.co.ke · <a href="https://www.linkedin.com/in/dennismburu" target="_blank" rel="noopener" style="color: #C9D3DA">LinkedIn</a> · Working in English &amp; French</span>
+</div>
+</div>
+</footer>
+</div>
+<div id="spacer" aria-hidden="true"></div>
+
+</div>
+
+<nav id="dots" aria-label="Screens">
+<a href="#top" data-label="Home" aria-label="Home"></a>
+<a href="#story" data-label="Part 1 · The maze" aria-label="Part 1, the maze"></a>
+<a href="#tensions" data-label="Part 2 · The tension" aria-label="Part 2, the tension"></a>
+<a href="#turn" data-label="Part 3 · The concept" aria-label="Part 3, the concept"></a>
+<a href="#programme" data-label="Work with me" aria-label="Work with me"></a>
+<a href="#stories" data-label="Reviews" aria-label="Reviews"></a>
+<a href="#about" data-label="About" aria-label="About"></a>
+<a href="#contact" data-label="Start a conversation" aria-label="Start a conversation"></a>
+</nav>
+
+<button id="totop" type="button" aria-label="Back to top"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button>
+
+<script>
+(function(){
+'use strict';
+var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var hasIO = 'IntersectionObserver' in window;
+
+/* ---------- Contact form ----------
+   1. Emails the message straight to info@dsmburu.co.ke via FormSubmit (no account needed).
+   2. If that fails, falls back to Netlify Forms so the message is still stored in the Netlify dashboard. */
+var EMAIL_ENDPOINT='https://formsubmit.co/ajax/info@dsmburu.co.ke';
+var f=document.querySelector('form[name="contact"]');
+var tcBtns=[];
+if(f){
+  var st=document.getElementById('cf-status'),b=f.querySelector('button[type="submit"]');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();b.disabled=true;st.style.color='#C9D3DA';st.textContent='Sending…';
+    var fd=new FormData(f);
+    var payload={
+      name:fd.get('name'),
+      email:fd.get('email'),
+      message:fd.get('message'),
+      _subject:'New message from '+(fd.get('name')||'a visitor')+' via dsmburu.co.ke',
+      _template:'table',
+      _captcha:'false',
+      _honey:fd.get('bot-field')||''
+    };
+    function sent(){f.reset();tcBtns.forEach(function(x){x.setAttribute('aria-pressed','false');});st.style.color='#E3A13B';st.textContent="Thank you, your message has been sent. I'll reply within 48 hours.";}
+    function failed(){st.style.color='#F2C072';st.textContent='Sorry, something went wrong. Please email me at info@dsmburu.co.ke instead.';}
+    fetch(EMAIL_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new URLSearchParams(payload)})
+    .then(function(r){return r.json().then(function(j){if(!r.ok||String(j.success)!=='true')throw new Error('email service');});})
+    .catch(function(){
+      return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()})
+      .then(function(r){if(!r.ok)throw new Error(r.status);});
+    })
+    .then(sent).catch(failed)
+    .finally(function(){b.disabled=false;});
+  });
+}
+
+/* ---------- Story tracker: the same four-part trail on every story screen ---------- */
+var PARTS=[['story','The maze'],['tensions','The tension'],['turn','The concept']];
+[].forEach.call(document.querySelectorAll('.trk'),function(t){
+  var n=+t.getAttribute('data-part'),h='<span class="trk-l">Your story</span>';
+  PARTS.forEach(function(p,i){
+    var k=i+1,cls=k===n?'on':(k<n?'done':'');
+    if(i>0)h+='<i class="'+(k<=n?'done':'')+'" aria-hidden="true"></i>';
+    h+='<a href="#'+p[0]+'" class="'+cls+'"'+(k===n?' aria-current="step"':'')+'><b>'+k+'</b><span>'+p[1]+'</span></a>';
+  });
+  t.innerHTML=h;t.setAttribute('role','navigation');t.setAttribute('aria-label','Your story, part '+n+' of '+PARTS.length);
+});
+
+/* ---------- Scroll reveals ---------- */
+var rvs=[].slice.call(document.querySelectorAll('.rv'));
+if(hasIO && !rm){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.06});
+  rvs.forEach(function(el){io.observe(el);});
+}else{rvs.forEach(function(el){el.classList.add('in');});}
+
+/* ---------- Progress bar, sticky nav, active link, back to top ---------- */
+var bar=document.getElementById('pbar'),wrap=document.getElementById('navwrap'),totop=document.getElementById('totop');
+var links=[].slice.call(document.querySelectorAll('#nav-links a.nl'));
+var scrs=[].slice.call(document.querySelectorAll('.scr')),dots=[].slice.call(document.querySelectorAll('#dots a'));
+var stage=document.getElementById('stage'),spacer=document.getElementById('spacer');
+var stageMq=window.matchMedia('(min-width: 900px) and (min-height: 560px)'),stageOn=false,curIdx=-1,leaveT=null,ticking=false;
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+/* Stage mode: the window is split into one "page" of scroll per screen (the invisible #spacer), and
+   the screen matching the scroll position fades in on the fixed stage while the previous one fades out. */
+function setNavVar(){if(!document.getElementById('nav-links').classList.contains('open'))document.documentElement.style.setProperty('--nav',wrap.offsetHeight+'px');}
+function idxOf(id){for(var i=0;i<scrs.length;i++)if(scrs[i].id===id)return i;return -1;}
+var jumping=-1,jumpT=null;
+function goTo(i,instant){
+  if(!instant&&!rm){jumping=i;clearTimeout(jumpT);jumpT=setTimeout(function(){jumping=-1;},2500);}
+  window.scrollTo({top:i*window.innerHeight,behavior:(instant||rm)?'auto':'smooth'});
+}
+['wheel','touchstart','keydown','pointerdown'].forEach(function(ev){window.addEventListener(ev,function(){jumping=-1;},{passive:true});});
+function activate(idx,instant){
+  if(idx===curIdx||!scrs[idx])return;
+  stage.style.setProperty('--dir',idx>curIdx?'1':'-1');
+  stage.style.background=getComputedStyle(scrs[idx]).backgroundColor;
+  var prev=curIdx;curIdx=idx;
+  scrs.forEach(function(s,i){s.classList.toggle('leaving',i===prev&&!instant);s.classList.toggle('live',i===idx);});
+  if(prev>-1&&scrs[prev]){try{scrs[prev].dispatchEvent(new Event('screen:leave'));}catch(err){}}
+  scrs[idx].scrollTop=0;
+  fitScreen(scrs[idx]);
+  try{scrs[idx].dispatchEvent(new Event('screen:live'));}catch(err){}
+  [].forEach.call(scrs[idx].querySelectorAll('.cnt'),function(c){if(!c.hasAttribute('data-done')){c.setAttribute('data-done','1');countUp(c);}});
+  clearTimeout(leaveT);leaveT=setTimeout(function(){scrs.forEach(function(s){s.classList.remove('leaving');});},650);
+  if(history.replaceState)history.replaceState(null,'','#'+scrs[idx].id);
+}
+function setStage(on){
+  if(on===stageOn)return;stageOn=on;
+  document.documentElement.classList.toggle('stage',on);
+  if(on){
+    spacer.innerHTML='';scrs.forEach(function(){var d=document.createElement('div');d.className='snap';spacer.appendChild(d);});
+    var i=idxOf((location.hash||'#').slice(1));if(i<0)i=0;
+    curIdx=-1;goTo(i,true);activate(i,true);
+  }else{
+    spacer.innerHTML='';var id=curIdx>-1?scrs[curIdx].id:'';
+    scrs.forEach(function(s){s.classList.remove('live','leaving');});
+    curIdx=-1;if(id){var el=document.getElementById(id);if(el)el.scrollIntoView();}
+  }
+}
+function onScroll(){
+  ticking=false;
+  var y=window.pageYOffset,vh=window.innerHeight,h=document.documentElement.scrollHeight-vh;
+  bar.style.width=(h>0?Math.min(100,y/h*100):0)+'%';
+  wrap.classList.toggle('scrolled',y>8);
+  totop.classList.toggle('show',y>vh*0.8);
+  var cur=0;
+  if(stageOn){
+    cur=Math.max(0,Math.min(scrs.length-1,Math.round(y/vh)));
+    if(jumping>-1){if(cur===jumping){jumping=-1;activate(cur);}else cur=jumping;}
+    else activate(cur);
+  }
+  else{var nh=wrap.offsetHeight;scrs.forEach(function(s,i){if(s.getBoundingClientRect().top<=nh+vh*0.4)cur=i;});}
+  dots.forEach(function(d,j){d.classList.toggle('on',j===cur);if(j===cur)d.setAttribute('aria-current','true');else d.removeAttribute('aria-current');});
+  var key=scrs[cur]?scrs[cur].getAttribute('data-nav'):'';
+  links.forEach(function(a){a.classList.toggle('on',!!key&&a.getAttribute('href')==='#'+key);});
+}
+/* Fit to window: if a screen's content is taller than the stage, zoom it out (down to 72%) so the whole
+   screen shows without scrolling. Below that, the content pins to the top and scrolls inside the screen. */
+function fitScreen(s){
+  var inner=s.firstElementChild;if(!inner)return;
+  var cz=parseFloat(inner.style.zoom)||1,avail=s.clientHeight-8,need=inner.getBoundingClientRect().height/cz;
+  var z=need>avail?Math.max(0.68,avail/need):1;z=Math.round(z*1000)/1000;
+  if(Math.abs(z-cz)>0.002)inner.style.zoom=z===1?'':String(z);
+}
+function fitAll(){scrs.forEach(function(s){var inner=s.firstElementChild;if(!inner)return;if(stageOn)fitScreen(s);else inner.style.zoom='';});}
+function relayout(){setNavVar();setStage(stageMq.matches);fitAll();if(stageOn&&curIdx>-1)goTo(curIdx,true);onScroll();}
+if('ResizeObserver' in window){
+  var ro=new ResizeObserver(function(es){if(!stageOn)return;es.forEach(function(e){var s=e.target.parentNode;if(s&&s.classList&&s.classList.contains('scr'))fitScreen(s);});});
+  scrs.forEach(function(s){if(s.firstElementChild)ro.observe(s.firstElementChild);});
+}
+window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true});
+window.addEventListener('resize',relayout);
+window.addEventListener('load',relayout);
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');if(!a||!stageOn)return;
+  var i=idxOf(a.getAttribute('href').slice(1));if(i<0)return;
+  e.preventDefault();goTo(i);
+});
+window.addEventListener('hashchange',function(){if(!stageOn)return;var i=idxOf(location.hash.slice(1));if(i>-1)goTo(i,true);});
+relayout();
+totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});
+
+/* ---------- Mobile menu ---------- */
+var mb=document.getElementById('menu-btn'),nl=document.getElementById('nav-links'),menuY=0;
+function closeMenu(){nl.classList.remove('open');mb.setAttribute('aria-expanded','false');}
+mb.addEventListener('click',function(){var o=nl.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');menuY=window.pageYOffset;});
+nl.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nl.classList.contains('open')){closeMenu();mb.focus();}});
+window.addEventListener('scroll',function(){if(nl.classList.contains('open')&&Math.abs(window.pageYOffset-menuY)>120)closeMenu();},{passive:true});
+
+/* ---------- Programme stepper ---------- */
+var tabs=[].slice.call(document.querySelectorAll('.pg-tab'));
+if(tabs.length){
+  var panels=[].slice.call(document.querySelectorAll('.pg-panel')),months=[].slice.call(document.querySelectorAll('.pg-track span')),
+      prev=document.getElementById('pg-prev'),next=document.getElementById('pg-next'),cnt=document.getElementById('pg-count'),pgCur=0;
+  function showStage(i,focus){
+    pgCur=i;
+    tabs.forEach(function(t,j){var on=j===i;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;if(on&&focus)t.focus();});
+    panels.forEach(function(p,j){p.hidden=j!==i;});
+    var ms=tabs[i].getAttribute('data-months').split(',');
+    months.forEach(function(m,j){m.classList.toggle('on',ms.indexOf(String(j+1))>-1);});
+    prev.disabled=i===0;next.disabled=i===tabs.length-1;cnt.textContent=(i+1)+' / '+tabs.length;
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){showStage(i);});
+    t.addEventListener('keydown',function(e){
+      var k=e.key,n=tabs.length;
+      if(k==='ArrowRight'||k==='ArrowDown'){e.preventDefault();showStage((i+1)%n,true);}
+      else if(k==='ArrowLeft'||k==='ArrowUp'){e.preventDefault();showStage((i-1+n)%n,true);}
+      else if(k==='Home'){e.preventDefault();showStage(0,true);}
+      else if(k==='End'){e.preventDefault();showStage(n-1,true);}
+    });
+  });
+  prev.addEventListener('click',function(){showStage(Math.max(0,pgCur-1));});
+  next.addEventListener('click',function(){showStage(Math.min(tabs.length-1,pgCur+1));});
+  showStage(0);
+}
+
+/* ---------- Count-up figures ---------- */
+var cnts=[].slice.call(document.querySelectorAll('.cnt'));
+function countUp(el){
+  var to=+el.getAttribute('data-to'),from=+(el.getAttribute('data-from')||0),suf=el.getAttribute('data-suffix')||'',dur=1400,t0=null;
+  if(rm){el.textContent=to+suf;return;}
+  function step(t){if(t0===null)t0=t;var p=Math.min(1,(t-t0)/dur);p=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*p)+suf;if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+if(hasIO){
+  var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!stageOn&&!e.target.hasAttribute('data-done')){e.target.setAttribute('data-done','1');countUp(e.target);io2.unobserve(e.target);}});},{threshold:0.6});
+  cnts.forEach(function(el){io2.observe(el);});
+}
+
+/* ---------- Tension chooser (pre-fills the form) ---------- */
+var tc=document.getElementById('tc');
+if(tc&&f){
+  tcBtns=[].slice.call(tc.querySelectorAll('button'));
+  var reply=document.getElementById('tc-reply'),ta=f.querySelector('textarea[name="message"]'),hid=f.querySelector('input[name="tension"]');
+  var replies={
+    team:"A team builds in the same direction when it can see the same map. Once your concept is clear, they can carry it with you.",
+    sales:"Selling more rarely comes from pushing harder. It comes from being clearer about who you serve, what they get, and why it's worth the price.",
+    growth:"Growth that depends on you isn't growth, it's strain. The work is building the systems and the team that carry the mission further than you can alone.",
+    customers:"Customers stay happy when the product keeps its promise, every time. That means protecting what you stand for in every decision between the idea and their hands.",
+    mission:"When the mission and the business start drifting apart, that's the clearest sign it's time for a concept that serves both.",
+    specific:"Tell me what you're working on, whether it's a product, your marketing or your team, and we'll see where it fits on the map.",
+    unsure:"That's often where the most important tension is hiding: the one you can't yet put into words. A conversation is the quickest way to find it."
+  };
+  var starters={
+    team:"The tension holding my business back: getting my team behind it.\n\nA little about the business: ",
+    specific:"There's something specific I'd like help with: \n\nA little about the business: ",
+    sales:"The tension holding my business back: selling more.\n\nA little about the business: ",
+    growth:"The tension holding my business back: growing the business.\n\nA little about the business: ",
+    customers:"The tension holding my business back: keeping customers happy.\n\nA little about the business: ",
+    mission:"The tension holding my business back: living out the mission.\n\nA little about the business: ",
+    unsure:"I'm not sure yet which tension is holding my business back.\n\nA little about the business: "
+  };
+  ta.addEventListener('input',function(){ta.removeAttribute('data-auto');});
+  tcBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var k=btn.getAttribute('data-k');
+      tcBtns.forEach(function(x){x.setAttribute('aria-pressed',x===btn?'true':'false');});
+      hid.value=btn.textContent.trim();
+      reply.textContent=replies[k];reply.hidden=false;
+      reply.classList.remove('in');void reply.offsetWidth;reply.classList.add('in');
+      if(!ta.value.trim()||ta.hasAttribute('data-auto')){ta.value=starters[k];ta.setAttribute('data-auto','1');}
+    });
+  });
+}
+
+/* ---------- The diagram ----------
+   Part 2 (data-mode="tension"): the five wants drift restlessly and tug on each other.
+   Part 3 (data-mode="concept"): the same five arrive restless, then settle around "Your concept". */
+var NS='http://www.w3.org/2000/svg';
+var DNAMES=['Team that believes',"Paid what it's worth",'Reaching more people','Keeping the quality','Living the mission'];
+var DLINES=[['Team that','believes'],['Paid what',"it's worth"],['Reaching','more people'],['Keeping the','quality'],['Living the','mission']];
+var DCAPS=[
+  'Wait for the whole team to believe, and reaching more people slows down.',
+  "Charge what it's worth, and every customer expects more.",
+  'Reach far more people, and keeping the quality gets harder.',
+  'Hold the quality high, and growth and costs feel the strain.',
+  'Hold every decision to the mission, and price and growth feel the strain.'
+];
+function makeDiagram(root){
+  var calm=root.getAttribute('data-mode')==='concept';
+  var svg=root.querySelector('svg'),gl=svg.querySelector('.g-lines'),gs=svg.querySelector('.g-spokes'),gn=svg.querySelector('.g-nodes'),
+      cap=root.querySelector('.td-cap'),sec=root.closest('.scr'),
+      items=calm?[]:[].slice.call(sec.querySelectorAll('.tl li'));
+  var CAP0=cap?cap.textContent:'';
+  var CX=220,CY=190,R=135,N=5,PULL=26,rest=[],cur=[],target=[],lab=[[0,-40,'middle'],[28,-3,'start'],[20,30,'start'],[-20,30,'end'],[-28,-3,'end']];
+  var hover=-1,pinned=-1,solved=calm&&rm,anim=null,settleT=null,vis=!hasIO,i,j;
+  for(i=0;i<N;i++){var a=(-90+i*72)*Math.PI/180;rest.push({x:CX+R*Math.cos(a),y:CY+R*Math.sin(a),ux:Math.cos(a),uy:Math.sin(a)});cur.push({x:rest[i].x,y:rest[i].y});target.push({x:rest[i].x,y:rest[i].y});}
+  var pairs=[],lines=[],slack=[],slackT=[];
+  for(i=0;i<N;i++)for(j=i+1;j<N;j++){pairs.push([i,j]);var p=document.createElementNS(NS,'path');p.setAttribute('class','ln');gl.appendChild(p);lines.push(p);slack.push(1);slackT.push(1);}
+  var spokes=[];
+  for(i=0;i<N;i++){var sp=document.createElementNS(NS,'path');sp.setAttribute('class','sp');gs.appendChild(sp);spokes.push(sp);}
+  var nodes=[];
+  for(i=0;i<N;i++){(function(i){
+    var g=document.createElementNS(NS,'g');g.setAttribute('class','tn');
+    var halo=document.createElementNS(NS,'circle');halo.setAttribute('r','24');halo.setAttribute('class','h');
+    var c=document.createElementNS(NS,'circle');c.setAttribute('r',i===4?'13':'11');c.setAttribute('class','c');
+    var t=document.createElementNS(NS,'text');t.setAttribute('text-anchor',lab[i][2]);if(i===4)t.setAttribute('font-weight','700');
+    DLINES[i].forEach(function(line,k){var ts=document.createElementNS(NS,'tspan');ts.setAttribute('x',lab[i][0]);ts.setAttribute('y',lab[i][1]+k*17);ts.textContent=line;t.appendChild(ts);});
+    g.appendChild(halo);g.appendChild(c);g.appendChild(t);gn.appendChild(g);nodes.push(g);
+    if(calm){g.setAttribute('aria-hidden','true');return;}
+    g.setAttribute('tabindex','0');g.setAttribute('role','button');g.setAttribute('aria-pressed','false');g.setAttribute('aria-label','Pull on '+DNAMES[i].toLowerCase());
+    g.addEventListener('pointerenter',function(e){if(e.pointerType!=='touch'){hover=i;update();}});
+    g.addEventListener('pointerleave',function(e){if(e.pointerType!=='touch'&&hover===i){hover=-1;update();}});
+    g.addEventListener('click',function(){pinned=pinned===i?-1:i;update();});
+    g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();g.dispatchEvent(new MouseEvent('click'));}});
+    g.addEventListener('focus',function(){var kb=false;try{kb=g.matches(':focus-visible');}catch(err){}if(kb){hover=i;update();}});
+    g.addEventListener('blur',function(){if(hover===i){hover=-1;update();}});
+  })(i);}
+  items.forEach(function(li,i){
+    li.addEventListener('pointerenter',function(e){if(e.pointerType!=='touch'){hover=i;update();}});
+    li.addEventListener('pointerleave',function(e){if(e.pointerType!=='touch'&&hover===i){hover=-1;update();}});
+  });
+
+  function activeIdx(){return solved?-1:(hover>-1?hover:pinned);}
+  function update(){
+    var a=activeIdx();
+    root.classList.toggle('solved',solved);
+    nodes.forEach(function(g,i){g.classList.toggle('on',i===a);if(!calm)g.setAttribute('aria-pressed',pinned===i?'true':'false');});
+    items.forEach(function(li,i){li.classList.toggle('hot',i===a);});
+    if(cap&&!calm)cap.textContent=a>-1?DCAPS[a]:CAP0;
+    var ax=a>-1?rest[a].x+rest[a].ux*PULL:0,ay=a>-1?rest[a].y+rest[a].uy*PULL:0;
+    target=rest.map(function(r,i){
+      if(a<0)return {x:r.x,y:r.y};
+      if(i===a)return {x:ax,y:ay};
+      return {x:r.x+(ax-r.x)*0.09,y:r.y+(ay-r.y)*0.09};
+    });
+    pairs.forEach(function(pr,k){var inv=a>-1&&(pr[0]===a||pr[1]===a);slackT[k]=inv?0:1;lines[k].classList.toggle('taut',inv);lines[k].classList.toggle('dim',a>-1&&!inv);});
+    if(rm){snap();draw();return;}
+    kick();
+  }
+  /* Only animate while the diagram is on screen; stop once everything has settled. */
+  function shown(){if(document.hidden)return false;if(stageOn)return !!(sec&&sec.classList.contains('live'));return vis;}
+  function restlessNow(){return !rm&&!solved&&shown();}
+  function wob(i,t){var A=7;return {x:A*Math.sin(t*0.0013*(1+i*0.19)+i*1.9),y:A*Math.cos(t*0.0011*(1+i*0.27)+i*2.6)};}
+  function kick(){if(!anim&&!rm)anim=requestAnimationFrame(tick);}
+  function settle(){if(!calm||solved)return;clearTimeout(settleT);settleT=setTimeout(function(){solved=true;update();},rm?0:900);}
+  function unsettle(){if(!calm||rm)return;clearTimeout(settleT);settleT=setTimeout(function(){solved=false;update();},450);}
+  if(hasIO){new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){kick();if(!stageOn)settle();}}).observe(root);}
+  document.addEventListener('visibilitychange',kick);
+  if(sec){sec.addEventListener('screen:live',function(){kick();settle();});sec.addEventListener('screen:leave',unsettle);}
+  function snap(){cur=target.map(function(t){return {x:t.x,y:t.y};});slack=slackT.slice();}
+  function tick(now){
+    var done=true,rs=restlessNow(),t=now||performance.now();
+    cur.forEach(function(c,i){var tg=target[i],tx=tg.x,ty=tg.y;if(rs){var w=wob(i,t);tx+=w.x;ty+=w.y;}c.x+=(tx-c.x)*0.16;c.y+=(ty-c.y)*0.16;if(Math.abs(tx-c.x)>0.05||Math.abs(ty-c.y)>0.05)done=false;});
+    slack.forEach(function(s,k){slack[k]+=(slackT[k]-s)*0.16;if(Math.abs(slackT[k]-slack[k])>0.004)done=false;});
+    if(done&&!rs)snap();
+    draw();
+    anim=(done&&!rs)?null:requestAnimationFrame(tick);
+  }
+  function draw(){
+    nodes.forEach(function(g,i){g.setAttribute('transform','translate('+cur[i].x.toFixed(1)+' '+cur[i].y.toFixed(1)+')');});
+    pairs.forEach(function(pr,k){
+      var p=cur[pr[0]],q=cur[pr[1]],mx=(p.x+q.x)/2,my=(p.y+q.y)/2,dx=CX-mx,dy=CY-my,d=Math.sqrt(dx*dx+dy*dy)||1,sg=slack[k]*18;
+      lines[k].setAttribute('d','M'+p.x.toFixed(1)+' '+p.y.toFixed(1)+' Q'+(mx+dx/d*sg).toFixed(1)+' '+(my+dy/d*sg).toFixed(1)+' '+q.x.toFixed(1)+' '+q.y.toFixed(1));
+    });
+    spokes.forEach(function(s,i){s.setAttribute('d','M'+CX+' '+CY+' L'+cur[i].x.toFixed(1)+' '+cur[i].y.toFixed(1));});
+  }
+  draw();update();
+  if(calm&&stageOn&&sec&&sec.classList.contains('live'))settle();
+}
+[].forEach.call(document.querySelectorAll('.td[data-mode]'),makeDiagram);})();
+</script>
+</body>
+</html>
